@@ -7,7 +7,7 @@ version = "2.1.0"
 
 android {
     compileSdk = 34
-    namespace = "com.aliucord.binaryresources"
+    namespace = "com.bugcord.binaryresources"
 
     defaultConfig {
         minSdk = 21 // This can likely be lower
@@ -44,7 +44,7 @@ afterEvaluate {
     publishing {
         publications {
             register(project.name, MavenPublication::class.java) {
-                groupId = "com.aliucord"
+                groupId = "com.bugcord"
                 artifactId = "binary-resources"
 
                 from(components["release"])
@@ -52,20 +52,7 @@ afterEvaluate {
         }
 
         repositories {
-            val username = System.getenv("MAVEN_RELEASE_USERNAME")
-            val password = System.getenv("MAVEN_RELEASE_PASSWORD")
-
-            if (username != null && password != null) {
-                maven {
-                    credentials {
-                        this.username = username
-                        this.password = password
-                    }
-                    setUrl("https://maven.aliucord.com/releases")
-                }
-            } else {
-                mavenLocal()
-            }
+            mavenLocal()
         }
     }
 }
